@@ -1,0 +1,4 @@
+Window 1800 1200 60
+Font fonts/tech.otf 18 255 255 255
+Circle CGreen 100 100 -0.03 0.02 0 255 0 200
+Rectangle RRed 500 600 0.02 -0.1 255 0 0 250 250

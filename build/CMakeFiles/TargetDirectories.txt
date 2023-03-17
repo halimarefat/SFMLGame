@@ -1,0 +1,3 @@
+/Users/ali/Desktop/Coding/SFMLGame/build/CMakeFiles/rebuild_cache.dir
+/Users/ali/Desktop/Coding/SFMLGame/build/CMakeFiles/edit_cache.dir
+/Users/ali/Desktop/Coding/SFMLGame/build/CMakeFiles/SFMLGame.dir
