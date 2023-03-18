@@ -1,4 +1,3 @@
-
 #include "config.h"
 
 
@@ -86,5 +85,18 @@ void configuration::objectsGen()
         rectangle.setFillColor(sf::Color(this->rectangle_RGB[0][i], this->rectangle_RGB[1][i], this->rectangle_RGB[2][i]));
         rectangle.setPosition(this->rectangle_xPos[i], this->rectangle_yPos[i]);
         this->rectangles.push_back(rectangle);
+    }
+}
+
+
+void configuration::move()
+{
+    for(int i = 0; i < this->getNumCircles(); i++)
+    {
+        this->circles[i].setPosition(this->circles[i].getPosition().x + this->circle_u[i], this->circles[i].getPosition().y + this->circle_v[i]);
+    }
+    for(int i = 0; i < this->getNumRectangles(); i++)
+    {
+        this->rectangles[i].setPosition(this->rectangles[i].getPosition().x + this->rectangle_u[i], this->rectangles[i].getPosition().y + this->rectangle_v[i]);
     }
 }

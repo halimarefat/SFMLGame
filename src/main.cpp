@@ -17,6 +17,8 @@ int main(int argc, char * argv[])
                 window.close();
         }
 
+        config.move();
+
         window.clear();
         for(auto& c : config.circles)
         {

@@ -45,4 +45,5 @@ public:
 
     void objectsGen();
 
+    void move();
 };
