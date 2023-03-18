@@ -16,6 +16,9 @@ public:
     int fps;
     int fontSize;
     int font_RGB[3];
+    sf::Font myFont;
+    std::vector<sf::Text> cTexts;
+    std::vector<sf::Text> rTexts;
     std::vector<sf::CircleShape> circles;
     std::vector<sf::RectangleShape> rectangles;
     std::vector<std::string> circle_names;
@@ -46,4 +49,6 @@ public:
     void objectsGen();
 
     void move();
+
+    void setName();
 };

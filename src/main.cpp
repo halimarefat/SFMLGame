@@ -5,7 +5,7 @@ int main(int argc, char * argv[])
     configuration config("config.txt");
     config.loadConfig();
     config.objectsGen();
-
+    
     sf::RenderWindow window(sf::VideoMode(config.wWidth, config.wheight), "Welcome to SFMLGame!");
 
     while(window.isOpen())
@@ -18,8 +18,10 @@ int main(int argc, char * argv[])
         }
 
         config.move();
+        
 
         window.clear();
+        config.setName();
         for(auto& c : config.circles)
         {
             window.draw(c);
@@ -27,6 +29,14 @@ int main(int argc, char * argv[])
         for(auto& r : config.rectangles)
         {
             window.draw(r);
+        }
+        for(auto& t : config.cTexts)
+        {
+            window.draw(t);
+        }
+        for(auto& t : config.rTexts)
+        {
+            window.draw(t);
         }
         window.display();
     }

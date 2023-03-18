@@ -32,6 +32,11 @@ void configuration::loadConfig()
         {
             configFile >> this->fontPath >> this->fontSize;
             configFile >> this->font_RGB[0] >> this->font_RGB[1] >> this->font_RGB[2];
+            if(!myFont.loadFromFile(this->fontPath))
+            {
+                std::cout << "Error loading font file!" << std::endl;
+                exit(-1);
+            }
         }
         else if(keyword == "Circle")
         {
@@ -88,7 +93,6 @@ void configuration::objectsGen()
     }
 }
 
-
 void configuration::move()
 {
     for(int i = 0; i < this->getNumCircles(); i++)
@@ -100,3 +104,32 @@ void configuration::move()
         this->rectangles[i].setPosition(this->rectangles[i].getPosition().x + this->rectangle_u[i], this->rectangles[i].getPosition().y + this->rectangle_v[i]);
     }
 }
+
+void configuration::setName()
+{
+    cTexts.clear();
+    rTexts.clear();
+    for(int i = 0; i < this->getNumCircles(); i++)
+    {
+        sf::Text text;
+        text.setFont(this->myFont);
+        text.setString(this->circle_names[i]);
+        text.setCharacterSize(this->fontSize);
+        text.setFillColor(sf::Color(this->font_RGB[0], this->font_RGB[1], this->font_RGB[2]));
+        text.setPosition(this->circles[i].getPosition().x + this->circles[i].getGlobalBounds().width / 2 - text.getGlobalBounds().width / 2, 
+                         this->circles[i].getPosition().y + this->circles[i].getGlobalBounds().height / 2 - text.getGlobalBounds().height / 2);
+        this->cTexts.push_back(text);
+    }
+    for(int i = 0; i < this->getNumRectangles(); i++)
+    {
+        sf::Text text;
+        text.setFont(this->myFont);
+        text.setString(this->rectangle_names[i]);
+        text.setCharacterSize(this->fontSize);
+        text.setFillColor(sf::Color(this->font_RGB[0], this->font_RGB[1], this->font_RGB[2]));
+        text.setPosition(this->rectangles[i].getPosition().x + this->rectangles[i].getGlobalBounds().width / 2 - text.getGlobalBounds().width / 2, 
+                         this->rectangles[i].getPosition().y + this->rectangles[i].getGlobalBounds().height / 2 - text.getGlobalBounds().height / 2);
+        this->rTexts.push_back(text);
+    }
+}
+
