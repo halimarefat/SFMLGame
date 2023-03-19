@@ -133,3 +133,29 @@ void configuration::setName()
     }
 }
 
+void configuration::checkBoundary()
+{
+    for(int i = 0; i < this->getNumCircles(); i++)
+    {
+        if(this->circles[i].getPosition().x + this->circles[i].getGlobalBounds().width >= this->wWidth || this->circles[i].getPosition().x <= 0)
+        {
+            this->circle_u[i] *= -1;
+        }
+        if(this->circles[i].getPosition().y + this->circles[i].getGlobalBounds().height >= this->wheight || this->circles[i].getPosition().y <= 0)
+        {
+            this->circle_v[i] *= -1;
+        }
+    }
+    for(int i = 0; i < this->getNumRectangles(); i++)
+    {
+        if(this->rectangles[i].getPosition().x + this->rectangles[i].getGlobalBounds().width >= this->wWidth || this->rectangles[i].getPosition().x <= 0)
+        {
+            this->rectangle_u[i] *= -1;
+        }
+        if(this->rectangles[i].getPosition().y + this->rectangles[i].getGlobalBounds().height >= this->wheight || this->rectangles[i].getPosition().y <= 0)
+        {
+            this->rectangle_v[i] *= -1;
+        }
+    }
+}
+

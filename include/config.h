@@ -51,4 +51,6 @@ public:
     void move();
 
     void setName();
+
+    void checkBoundary();
 };

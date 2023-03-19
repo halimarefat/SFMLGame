@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 project(SFMLGame VERSION 1.0
-        DESCRIPTION "SFML Game"
+        DESCRIPTION "SFMLGame"
         LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)

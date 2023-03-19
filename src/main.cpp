@@ -7,6 +7,7 @@ int main(int argc, char * argv[])
     config.objectsGen();
     
     sf::RenderWindow window(sf::VideoMode(config.wWidth, config.wheight), "Welcome to SFMLGame!");
+    window.setFramerateLimit(config.fps);
 
     while(window.isOpen())
     {
@@ -18,10 +19,9 @@ int main(int argc, char * argv[])
         }
 
         config.move();
-        
-
-        window.clear();
+        config.checkBoundary();
         config.setName();
+        window.clear();
         for(auto& c : config.circles)
         {
             window.draw(c);
