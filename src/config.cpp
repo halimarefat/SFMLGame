@@ -79,6 +79,7 @@ void configuration::objectsGen()
 {
     for(int i = 0; i < this->getNumCircles(); i++)
     {
+        this->cflag.push_back(0);
         sf::CircleShape circle(this->circle_radius[i]);
         circle.setFillColor(sf::Color(this->circle_RGB[0][i], this->circle_RGB[1][i], this->circle_RGB[2][i]));
         circle.setPosition(this->circle_xPos[i], this->circle_yPos[i]);
@@ -86,6 +87,7 @@ void configuration::objectsGen()
     }
     for(int i = 0; i < this->getNumRectangles(); i++)
     {
+        this->rflag.push_back(0);
         sf::RectangleShape rectangle(sf::Vector2f(this->rectangle_width[i], this->rectangle_height[i]));
         rectangle.setFillColor(sf::Color(this->rectangle_RGB[0][i], this->rectangle_RGB[1][i], this->rectangle_RGB[2][i]));
         rectangle.setPosition(this->rectangle_xPos[i], this->rectangle_yPos[i]);
@@ -137,25 +139,94 @@ void configuration::checkBoundary()
 {
     for(int i = 0; i < this->getNumCircles(); i++)
     {
-        if(this->circles[i].getPosition().x + this->circles[i].getGlobalBounds().width >= this->wWidth || this->circles[i].getPosition().x <= 0)
+        if(this->cflag[i] == 0)
         {
+            if((this->circles[i].getPosition().x + this->circles[i].getGlobalBounds().width >= this->wWidth || 
+                this->circles[i].getPosition().x <= 0))
+            {
+                this->circle_u[i] *= -1;
+            }
+            if((this->circles[i].getPosition().y + this->circles[i].getGlobalBounds().height >= this->wheight || 
+                this->circles[i].getPosition().y <= 0))
+            {
+                this->circle_v[i] *= -1;
+            }
+        }
+    }
+
+    for(int i = 0; i < this->getNumRectangles(); i++)
+    {
+        if(this->rflag[i] == 0)
+        {
+            if((this->rectangles[i].getPosition().x + this->rectangles[i].getGlobalBounds().width >= this->wWidth || 
+                this->rectangles[i].getPosition().x <= 0))
+            {
+                this->rectangle_u[i] *= -1;
+            }
+            if((this->rectangles[i].getPosition().y + this->rectangles[i].getGlobalBounds().height >= this->wheight || 
+                this->rectangles[i].getPosition().y <= 0))
+            {
+                this->rectangle_v[i] *= -1;
+            }
+        }
+    }
+}
+
+
+void configuration::checkInitialPos()
+{
+    for(int i = 0; i < this->getNumCircles(); i++)
+    {
+        if(this->circles[i].getPosition().x + this->circles[i].getGlobalBounds().width > this->wWidth ||
+           this->circles[i].getPosition().x < 0)
+        {
+            this->cflag[i] = 1;
             this->circle_u[i] *= -1;
         }
-        if(this->circles[i].getPosition().y + this->circles[i].getGlobalBounds().height >= this->wheight || this->circles[i].getPosition().y <= 0)
+        else if(this->circles[i].getPosition().y + this->circles[i].getGlobalBounds().height > this->wheight ||
+                this->circles[i].getPosition().y < 0)
         {
+            this->cflag[i] = 1;
             this->circle_v[i] *= -1;
         }
     }
     for(int i = 0; i < this->getNumRectangles(); i++)
     {
-        if(this->rectangles[i].getPosition().x + this->rectangles[i].getGlobalBounds().width >= this->wWidth || this->rectangles[i].getPosition().x <= 0)
+        if(this->rectangles[i].getPosition().x + this->rectangles[i].getGlobalBounds().width > this->wWidth ||
+           this->rectangles[i].getPosition().x < 0)
         {
+            this->rflag[i] = 1;
             this->rectangle_u[i] *= -1;
         }
-        if(this->rectangles[i].getPosition().y + this->rectangles[i].getGlobalBounds().height >= this->wheight || this->rectangles[i].getPosition().y <= 0)
+        else if(this->rectangles[i].getPosition().y + this->rectangles[i].getGlobalBounds().height > this->wheight ||
+                this->rectangles[i].getPosition().y < 0)
         {
+            this->rflag[i] = 1;
             this->rectangle_v[i] *= -1;
         }
     }
 }
 
+void configuration::checkPos()
+{
+    for(int i = 0; i < this->getNumCircles(); i++)
+    {
+        if(this->circles[i].getPosition().x + this->circles[i].getGlobalBounds().width <= this->wWidth &&
+           this->circles[i].getPosition().x >= 0 &&
+           this->circles[i].getPosition().y + this->circles[i].getGlobalBounds().height <= this->wheight &&
+           this->circles[i].getPosition().y >= 0)
+        {
+            this->cflag[i] = 0;
+        }
+    }
+    for(int i = 0; i < this->getNumRectangles(); i++)
+    {
+        if(this->rectangles[i].getPosition().x + this->rectangles[i].getGlobalBounds().width <= this->wWidth &&
+           this->rectangles[i].getPosition().x >= 0 &&
+           this->rectangles[i].getPosition().y + this->rectangles[i].getGlobalBounds().height <= this->wheight &&
+           this->rectangles[i].getPosition().y >= 0)
+        {
+            this->rflag[i] = 0;
+        }
+    }
+}

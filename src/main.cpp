@@ -5,7 +5,7 @@ int main(int argc, char * argv[])
     configuration config("config.txt");
     config.loadConfig();
     config.objectsGen();
-    
+    config.checkInitialPos();
     sf::RenderWindow window(sf::VideoMode(config.wWidth, config.wheight), "Welcome to SFMLGame!");
     window.setFramerateLimit(config.fps);
 
@@ -19,6 +19,7 @@ int main(int argc, char * argv[])
         }
 
         config.move();
+        config.checkPos();
         config.checkBoundary();
         config.setName();
         window.clear();

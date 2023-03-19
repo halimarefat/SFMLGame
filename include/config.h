@@ -8,6 +8,8 @@ class configuration
 
   
 public:
+    std::vector<int> cflag;
+    std::vector<int> rflag;
     std::string configPath;
     std::string fontPath;
     std::string name;
@@ -53,4 +55,8 @@ public:
     void setName();
 
     void checkBoundary();
+    
+    void checkInitialPos();
+    
+    void checkPos();
 };
