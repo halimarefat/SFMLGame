@@ -8,6 +8,8 @@ class Entity
     const std::string m_nameTag = "Default";
     bool m_alive = true;
 
+    Entity(const std::string& nameTag, size_t id);
+
 public:
 
     std::shared_ptr<CTransform> cTransform;
@@ -15,6 +17,8 @@ public:
     std::shared_ptr<CName> cName;
     std::shared_ptr<CShape> cShape;
     std::shared_ptr<CBBox> cBBox;
-
-    Entity(const std::string& nameTag, size_t id);
+    
+    void kill();
+    const std::string nameTag() const;
+    const bool alive() const;
 };
