@@ -5,8 +5,7 @@
 
 class configuration
 {
-
-  
+    
 public:
     std::vector<int> cflag;
     std::vector<int> rflag;

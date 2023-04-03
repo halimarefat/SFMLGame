@@ -1,6 +1,5 @@
 #include "config.h"
 
-
 configuration::configuration(const std::string path)
 {
     this->configPath = path;
